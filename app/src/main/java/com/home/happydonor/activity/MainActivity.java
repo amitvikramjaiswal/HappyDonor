@@ -9,7 +9,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.home.happydonor.R;
+import com.home.happydonor.fragment.AboutFragment;
+import com.home.happydonor.fragment.FindDonorsFragment;
+import com.home.happydonor.fragment.HelpFragment;
+import com.home.happydonor.fragment.MyDonationsFragment;
 import com.home.happydonor.fragment.NavigationDrawerFragment;
+import com.home.happydonor.fragment.ProfileFragment;
 
 
 public class MainActivity extends BaseActivity
@@ -46,18 +51,22 @@ public class MainActivity extends BaseActivity
         Fragment fragment = null;
         switch (position) {
             case 0:
+                fragment = new ProfileFragment();
                 break;
             case 1:
+                fragment = new FindDonorsFragment();
                 break;
             case 2:
+                fragment = new MyDonationsFragment();
                 break;
             case 3:
+                fragment = new HelpFragment();
                 break;
             case 4:
-                break;
-            case 5:
+                fragment = new AboutFragment();
                 break;
             default:
+                fragment = new FindDonorsFragment();
                 break;
         }
         replaceFragment(fragment);
