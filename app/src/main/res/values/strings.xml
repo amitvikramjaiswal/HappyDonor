@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">HappyDonor</string>
+
+    <array name="nav_drawer_list">
+        <item>Profile</item>
+        <item>Find donors</item>
+        <item>My Contributions</item>
+        <item>Help</item>
+        <item>About</item>
+    </array>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
+
+    <string name="action_settings">Settings</string>
+</resources>
