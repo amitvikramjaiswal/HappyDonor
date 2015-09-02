@@ -1,5 +1,8 @@
 package com.home.happydonor.fragment;
 
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -7,12 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
 import com.home.happydonor.R;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 /**
  * Created by amitvikramjaiswal on 31/08/15.
@@ -70,5 +76,36 @@ public class FindDonorsFragment extends BaseFragment implements OnMapReadyCallba
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
+        googleMap.setMyLocationEnabled(true);
+        centerMapOnMyLocation();
+    }
+
+    private Location getMyLocation() {
+        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+
+        List<String> providers = locationManager.getProviders(true);
+        Location bestLocation = null;
+        for (String provider : providers) {
+            Location l = locationManager.getLastKnownLocation(provider);
+            if (l == null) {
+                continue;
+            }
+            if (bestLocation == null || l.getAccuracy() < bestLocation.getAccuracy()) {
+                // Found best last known location: %s", l);
+                bestLocation = l;
+            }
+        }
+        return bestLocation;
+    }
+
+    private void centerMapOnMyLocation() {
+        Location location = getMyLocation();
+        LatLng myLatLng = null;
+        if (location != null) {
+            myLatLng = new LatLng(location.getLatitude(),
+                    location.getLongitude());
+        }
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(myLatLng,
+                16));
     }
 }
