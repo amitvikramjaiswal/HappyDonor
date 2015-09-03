@@ -16,6 +16,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.home.happydonor.R;
+import com.home.happydonor.application.HDApplication;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -93,6 +94,7 @@ public class FindDonorsFragment extends BaseFragment implements OnMapReadyCallba
             if (bestLocation == null || l.getAccuracy() < bestLocation.getAccuracy()) {
                 // Found best last known location: %s", l);
                 bestLocation = l;
+                HDApplication.setLocation(bestLocation);
             }
         }
         return bestLocation;
@@ -100,11 +102,11 @@ public class FindDonorsFragment extends BaseFragment implements OnMapReadyCallba
 
     private void centerMapOnMyLocation() {
         Location location = getMyLocation();
-        LatLng myLatLng = null;
-        if (location != null) {
-            myLatLng = new LatLng(location.getLatitude(),
-                    location.getLongitude());
-        }
+        location = location != null ? location : HDApplication.getLocation();
+        if (location == null)
+            return;
+        LatLng myLatLng = new LatLng(location.getLatitude(),
+                location.getLongitude());
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(myLatLng,
                 16));
     }

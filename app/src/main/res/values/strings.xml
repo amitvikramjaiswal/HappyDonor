@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">HappyDonor</string>
+    <string name="location_services_required"><b>%1$s</b> requires GPS. Do you want to turn it on?</string>
 
     <array name="nav_drawer_list">
         <item>Profile</item>
@@ -17,4 +18,8 @@
     <string name="action_settings">Settings</string>
 
     <string name="google_map_v2_api_key">AIzaSyDFrQEbN0Q_hbnmJ4GcQjaU3eEk5lCR8pI</string>
+    <string name="internet_unavailable">Internet unavailable</string>
+    <string name="enable_gps_title">Enable GPS ?</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
 </resources>
