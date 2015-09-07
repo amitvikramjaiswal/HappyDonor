@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HappyDonor</string>
+    <string name="app_name">Happy Donor</string>
     <string name="location_services_required"><b>%1$s</b> requires GPS. Do you want to turn it on?</string>
 
     <array name="nav_drawer_list">
