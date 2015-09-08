@@ -6,7 +6,7 @@ import android.support.multidex.MultiDexApplication;
 import com.parse.Parse;
 
 /**
- * Created by ajaiswal on 9/3/2015.
+ * Created by amitvikramjaiswal on 9/3/2015.
  */
 public class HDApplication extends MultiDexApplication {
 
