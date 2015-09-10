@@ -1,6 +1,11 @@
 package com.home.happydonor.dataaccess;
 
-import com.home.happydonor.entity.BaseTO;
+import com.parse.DeleteCallback;
+import com.parse.FindCallback;
+import com.parse.GetCallback;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.SaveCallback;
 
 import java.util.List;
 
@@ -9,27 +14,30 @@ import java.util.List;
  */
 public abstract class BaseDAOImpl implements BaseDAO {
     @Override
-    public List<BaseTO> fetchAll() {
-        return null;
+    public void fetchAll(String pTable, FindCallback pFindCallback) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(pTable);
+        query.findInBackground(pFindCallback);
     }
 
     @Override
-    public BaseTO fetchRecordForKey(BaseTO key) {
-        return null;
+    public void fetchRecordForKey(String pTable, String pKey, String pValue, GetCallback<ParseObject> pGetCallback) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(pTable);
+        query.whereEqualTo(pKey, pValue);
+        query.getFirstInBackground(pGetCallback);
     }
 
     @Override
-    public void addObject(BaseTO baseTO) {
+    public void addObject(ParseObject parseObject, SaveCallback pSaveCallback) {
 
     }
 
     @Override
-    public void updateRecord(BaseTO baseTO) {
+    public void updateRecord(ParseObject parseObject, GetCallback<ParseObject> pGetCallback, SaveCallback pSaveCallback) {
 
     }
 
     @Override
-    public void deleteRecordForKey(BaseTO baseTO) {
+    public void deleteRecordForKey(ParseObject parseObject, DeleteCallback pDeleteCallback) {
 
     }
 
