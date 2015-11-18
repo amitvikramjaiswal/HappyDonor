@@ -7,32 +7,50 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 
-import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by amitvikramjaiswal on 21/08/15.
  */
 public abstract class BaseDAOImpl implements BaseDAO {
     @Override
-    public void fetchAll(String pTable, FindCallback pFindCallback) {
+    public void fetchAll(String pTable, FindCallback pFindCallback, String... includeKeys) {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(pTable);
+        for (String key : includeKeys) {
+            query.include(key);
+        }
         query.findInBackground(pFindCallback);
     }
 
     @Override
-    public void fetchRecordForKey(String pTable, String pKey, String pValue, GetCallback<ParseObject> pGetCallback) {
+    public void fetchRecordForKeys(String pTable, Map<String, Object> pMap, GetCallback<ParseObject> pGetCallback, String... includeKeys) {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(pTable);
-        query.whereEqualTo(pKey, pValue);
+        Set<String> keys = pMap.keySet();
+        for (String key : keys) {
+            query.whereEqualTo(key, pMap.get(key));
+        }
+        for (String key : includeKeys) {
+            query.include(key);
+        }
         query.getFirstInBackground(pGetCallback);
     }
 
     @Override
-    public void addObject(ParseObject parseObject, SaveCallback pSaveCallback) {
-
+    public void fetchRecordsForKeys(String pTable, Map<String, Object> pMap, FindCallback<ParseObject> pFindCallback, String... includeKeys) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(pTable);
+        Set<String> keys = pMap.keySet();
+        for (String key : keys) {
+            query.whereEqualTo(key, pMap.get(key));
+        }
+        for (String key : includeKeys) {
+            query.include(key);
+        }
+        query.findInBackground(pFindCallback);
     }
 
     @Override
-    public void updateRecord(ParseObject parseObject, GetCallback<ParseObject> pGetCallback, SaveCallback pSaveCallback) {
+    public void addObject(ParseObject parseObject, SaveCallback pSaveCallback) {
 
     }
 
