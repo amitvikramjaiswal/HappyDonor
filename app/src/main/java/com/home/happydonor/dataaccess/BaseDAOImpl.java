@@ -51,12 +51,12 @@ public abstract class BaseDAOImpl implements BaseDAO {
 
     @Override
     public void addObject(ParseObject parseObject, SaveCallback pSaveCallback) {
-
+        parseObject.saveEventually(pSaveCallback);
     }
 
     @Override
     public void deleteRecordForKey(ParseObject parseObject, DeleteCallback pDeleteCallback) {
-
+        parseObject.deleteEventually(pDeleteCallback);
     }
 
     @Override
